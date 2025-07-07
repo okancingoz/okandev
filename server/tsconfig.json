@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ES2020", // Modern JS desteği
+    "module": "CommonJS", // Node.js için
+    "rootDir": "src", // TS kaynak klasörü
+    "outDir": "dist", // Derlenmiş JS'ler buraya gidecek
+    "strict": true, // Tüm tip kurallarını uygula
+    "esModuleInterop": true, // import express from 'express' desteği
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}

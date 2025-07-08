@@ -1,2 +1,2 @@
 # okandev
-Okandev is a full-stack portfolio project with separate client and server folders. Backend uses Node.js, Express, TypeScript, and MongoDB with modular, scalable, and OOP design. Frontend built with React. Demonstrates clean architecture and production-ready best practices.
+Okandev is a full-stack portfolio application built with React, Node.js, TypeScript, Express, and MongoDB. The project emphasizes clean architecture, modular structure, OOP principles, and production-ready backend practices including centralized error handling, environment configuration, and scalable API design.

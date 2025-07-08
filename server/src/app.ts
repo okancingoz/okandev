@@ -3,6 +3,8 @@ import cors from "cors";
 import morgan from "morgan";
 import globalErrorHandler from "./middlewares/global-error.middleware";
 import AppError from "./utils/app-error.util";
+import authRoutes from "./routes/auth.routes";
+import adminRoutes from "./routes/admin.routes";
 
 // Importing the configuration
 const app: Application = express();
@@ -10,7 +12,14 @@ const app: Application = express();
 // Middleware setup
 app.use(express.json());
 app.use(cors());
-app.use(morgan("dev"));
+
+if (process.env.NODE_ENV === "development") {
+  app.use(morgan("dev"));
+}
+
+// Routes
+app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/admin", adminRoutes);
 
 // Test route
 app.get("/", (req, res) => {

@@ -15,6 +15,11 @@ if (
   );
 }
 
+if (!process.env.JWT_SECRET) {
+  throw new Error("Missing required environment variable: JWT_SECRET");
+}
+
+
 // Export configuration object
 export const config = {
   port: parseInt(process.env.PORT, 10) || 5000,
@@ -23,7 +28,7 @@ export const config = {
     process.env.DATABASE_PASSWORD
   ),
   jwt: {
-    secret: process.env.JWT_SECRET || "fallbackSecret",
+    secret: process.env.JWT_SECRET || "defaultSecretKey",
     expiresIn: process.env.JWT_EXPIRES_IN || "90d",
   },
   env: process.env.NODE_ENV || "development",

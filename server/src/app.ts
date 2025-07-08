@@ -1,8 +1,8 @@
 import express, { Application } from "express";
 import cors from "cors";
 import morgan from "morgan";
-import globalErrorHandler from "./middlewares/globalErrorHandler";
-import AppError from "./utils/AppError";
+import globalErrorHandler from "./middlewares/global-error.middleware";
+import AppError from "./utils/app-error.util";
 
 // Importing the configuration
 const app: Application = express();

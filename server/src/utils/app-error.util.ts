@@ -1,4 +1,3 @@
-// server/src/utils/AppError.ts
 // This file defines a custom error class for handling application errors in a structured way.
 export default class AppError extends Error {
   // This class extends the built-in Error class to create a custom error type

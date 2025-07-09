@@ -1,7 +1,7 @@
 import { Document } from "mongoose";
-
+import { Types } from "mongoose";
 export interface IUser extends Document {
-  _id: any; // Mongoose ObjectId
+  _id: Types.ObjectId; // Mongoose ObjectId
   name: string;
   email: string;
   password: string;

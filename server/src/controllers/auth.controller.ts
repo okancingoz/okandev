@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { User } from "../models/user.model";
+import * as userService from "../services/user.service";
 import jwt from "jsonwebtoken";
 import catchAsync from "../utils/catch-async.util";
 import AppError from "../utils/app-error.util";
@@ -20,7 +20,7 @@ export const loginUser = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const { email, password } = req.body;
 
-    const user = (await User.findOne({ email }).select("+password")) as any;
+    const user = await userService.findUserByEmail(email);
 
     if (!user) {
       return next(new AppError("Invalid credentials", 401));
@@ -32,11 +32,41 @@ export const loginUser = catchAsync(
       return next(new AppError("Invalid credentials", 401));
     }
 
-    res.json({
-      _id: user._id,
-      name: user.name,
-      email: user.email,
+    res.status(200).json({
+      status: "success",
       token: generateToken(user._id.toString()),
+      data: {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+      },
     });
   }
 );
+
+// Maybe add a register route in the future
+// For now, we only have the login route.
+// export const registerUser = catchAsync(
+//   async (req: Request, res: Response, next: NextFunction) => {
+//     const { name, email, password } = req.body;
+
+//     const existingUser = await User.findOne({ email });
+//     if (existingUser) {
+//       return next(new AppError("User already exists", 400));
+//     }
+
+//     const user = (await User.create({ name, email, password })) as IUser & {
+//       _id: any;
+//     };
+
+//     res.status(201).json({
+//       status: "success",
+//       token: generateToken(user._id.toString()),
+//       data: {
+//         _id: user._id,
+//         name: user.name,
+//         email: user.email,
+//       },
+//     });
+//   }
+// );

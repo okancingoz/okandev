@@ -14,6 +14,7 @@ export default class AppError extends Error {
     this.status = `${statusCode}`.startsWith("4") ? "fail" : "error";
     this.isOperational = true;
 
+    // Capturing the stack trace for debugging purposes
     Error.captureStackTrace(this, this.constructor);
   }
 }

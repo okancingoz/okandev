@@ -20,6 +20,8 @@ interface JwtPayload {
   exp: number;
 }
 
+// Middleware to protect routes
+// This middleware checks for a valid JWT token in the request headers.
 export const protect = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     let token;

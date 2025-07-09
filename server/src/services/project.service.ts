@@ -2,7 +2,7 @@ import Project from "../models/project.model";
 import { IProject, IProjectService } from "../interfaces/project.interface";
 import { Types } from "mongoose";
 
-export class ProjectService implements IProjectService {
+class ProjectService implements IProjectService {
   async createProject(projectData: Partial<IProject>): Promise<IProject> {
     const project = new Project(projectData);
     return await project.save();
@@ -34,3 +34,5 @@ export class ProjectService implements IProjectService {
     return await Project.find().sort({ createdAt: -1 }).exec();
   }
 }
+
+export default new ProjectService();

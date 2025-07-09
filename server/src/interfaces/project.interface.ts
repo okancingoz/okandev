@@ -14,11 +14,15 @@ export interface IProject {
 
 export interface IProjectService {
   createProject(projectData: Partial<IProject>): Promise<IProject>;
+
   getProjectById(projectId: string): Promise<IProject | null>;
+
   updateProject(
     projectId: string,
     projectData: Partial<IProject>
   ): Promise<IProject | null>;
+
   deleteProject(projectId: string): Promise<void>;
+
   getAllProjects(): Promise<IProject[]>;
 }

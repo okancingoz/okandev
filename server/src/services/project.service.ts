@@ -25,9 +25,9 @@ class ProjectService implements IProjectService {
     }).exec();
   }
 
-  async deleteProject(projectId: string): Promise<void> {
-    if (!Types.ObjectId.isValid(projectId)) return;
-    await Project.findByIdAndDelete(projectId).exec();
+  async deleteProject(projectId: string): Promise<IProject | null> {
+    if (!Types.ObjectId.isValid(projectId)) return null;
+    return await Project.findByIdAndDelete(projectId).exec();
   }
 
   async getAllProjects(): Promise<IProject[]> {

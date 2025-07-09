@@ -22,7 +22,7 @@ export interface IProjectService {
     projectData: Partial<IProject>
   ): Promise<IProject | null>;
 
-  deleteProject(projectId: string): Promise<void>;
+  deleteProject(projectId: string): Promise<IProject | null>;
 
   getAllProjects(): Promise<IProject[]>;
 }

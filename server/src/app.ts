@@ -6,6 +6,7 @@ import AppError from "./utils/app-error.util";
 import authRoutes from "./routes/auth.routes";
 import adminRoutes from "./routes/admin.routes";
 import projectRoutes from "./routes/project.routes";
+import messageRoutes from "./routes/message.routes";
 
 // Importing the configuration
 const app: Application = express();
@@ -21,7 +22,8 @@ if (process.env.NODE_ENV === "development") {
 // Routes
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/admin", adminRoutes);
-app.use("/api/v1/projects",projectRoutes)
+app.use("/api/v1/projects", projectRoutes);
+app.use("/api/v1/messages", messageRoutes);
 
 // Test route
 app.get("/", (req, res) => {

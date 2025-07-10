@@ -1,20 +1,7 @@
 import multer from "multer";
-import path from "path";
 
 // Configure multer for file uploads
-const storage = multer.diskStorage({
-  destination: function (_req, _file, cb) {
-    cb(null, "uploads/");
-  },
-  filename: function (_req, file, cb) {
-    const ext = path.extname(file.originalname);
-    const name = path
-      .basename(file.originalname, ext)
-      .replace(/\s+/g, "-")
-      .toLowerCase();
-    cb(null, `${name}-${Date.now()}${ext}`);
-  },
-});
+const storage = multer.memoryStorage();
 
 const fileFilter = (
   _req: Express.Request,

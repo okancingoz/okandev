@@ -8,6 +8,8 @@ import adminRoutes from "./routes/admin.routes";
 import projectRoutes from "./routes/project.routes";
 import messageRoutes from "./routes/message.routes";
 import aboutRoutes from "./routes/about.routes";
+import path from "path";
+import uploadRoutes from "./routes/upload.routes";
 
 // Importing the configuration
 const app: Application = express();
@@ -26,6 +28,11 @@ app.use("/api/v1/admin", adminRoutes);
 app.use("/api/v1/projects", projectRoutes);
 app.use("/api/v1/messages", messageRoutes);
 app.use("/api/v1/about", aboutRoutes);
+app.use("/api/v1/upload", uploadRoutes);
+
+// Serve static files from the uploads directory
+// This allows the application to serve files uploaded by users
+app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 
 // Test route
 app.get("/", (req, res) => {

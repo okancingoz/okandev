@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from "express";
+import logger from "../utils/logger";
 // import { AppError } from "../utils/appError";
 
 const globalErrorHandler = (
@@ -7,6 +8,7 @@ const globalErrorHandler = (
   res: Response,
   next: NextFunction
 ) => {
+  logger.error(err);
   err.statusCode = err.statusCode || 500;
   err.status = err.status || "error";
 

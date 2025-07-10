@@ -10,12 +10,34 @@ import messageRoutes from "./routes/message.routes";
 import aboutRoutes from "./routes/about.routes";
 import path from "path";
 import uploadRoutes from "./routes/upload.routes";
+import helmet from "helmet";
+import compression from "compression";
+import rateLimit from "express-rate-limit";
 
 // Importing the configuration
 const app: Application = express();
 
 // Middleware setup
+// This middleware parses incoming requests with JSON payloads
 app.use(express.json());
+
+// Security headers
+app.use(helmet());
+
+// Rate limiting to prevent abuse
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests per windowMs
+  standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+  legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+  message: "Too many requests, please try again later.",
+});
+app.use("/api", limiter); // Apply rate limiting to all API routes
+
+// Compression middleware to reduce response size
+app.use(compression());
+
+// CORS middleware to allow cross-origin requests
 app.use(cors());
 
 if (process.env.NODE_ENV === "development") {

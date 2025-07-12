@@ -32,11 +32,20 @@ export const loginUser = catchAsync(
       return next(new AppError("Invalid credentials", 401));
     }
 
+    const token = generateToken(user._id.toString());
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: config.env === "production",
+      sameSite: "lax",
+      maxAge: 90 * 24 * 60 * 60 * 1000,
+    });
+
     res.status(200).json({
       status: "success",
-      token: generateToken(user._id.toString()),
       data: {
         _id: user._id,
+        token,
         name: user.name,
         email: user.email,
       },

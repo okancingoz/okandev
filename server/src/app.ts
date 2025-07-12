@@ -17,6 +17,14 @@ import rateLimit from "express-rate-limit";
 // Importing the configuration
 const app: Application = express();
 
+// CORS middleware to allow cross-origin requests
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
+
 // Middleware setup
 // This middleware parses incoming requests with JSON payloads
 app.use(express.json());
@@ -36,9 +44,6 @@ app.use("/api", limiter); // Apply rate limiting to all API routes
 
 // Compression middleware to reduce response size
 app.use(compression());
-
-// CORS middleware to allow cross-origin requests
-app.use(cors());
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));

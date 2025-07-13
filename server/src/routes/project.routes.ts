@@ -11,8 +11,6 @@ import { protect } from "../middlewares/auth.middleware";
 
 const router = express.Router();
 
-router.use(protect);
-
 // Public routes
 router.get("/", getAllProjects);
 router.get("/:id", getProjectById);

@@ -21,6 +21,7 @@
     "framer-motion": "^12.23.3",
     "glslify": "^7.1.1",
     "gsap": "^3.13.0",
+    "keen-slider": "^6.8.6",
     "next": "15.3.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

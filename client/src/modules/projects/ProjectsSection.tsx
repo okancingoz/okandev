@@ -38,7 +38,7 @@ export function ProjectsSection() {
     return <div className="text-white">No projects found.</div>;
 
   return (
-    <section className="px-4 py-16 bg-black">
+    <section id="projects" className="px-4 py-16 bg-black">
       <h2 className="text-3xl text-white font-bold mb-8 text-center">
         Projects
       </h2>

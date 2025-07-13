@@ -4,6 +4,7 @@
 import GalaxyScene from "@/app/lib/galaxy-scene";
 import AboutMe from "@/components/AboutMe";
 import Header from "@/components/Header";
+import { ContactSection } from "@/modules/contact";
 import { ProjectsSection } from "@/modules/projects";
 
 export default function HomePage() {
@@ -13,6 +14,7 @@ export default function HomePage() {
       <GalaxyScene />
       <AboutMe />
       <ProjectsSection />
+      <ContactSection />
     </div>
   );
 }

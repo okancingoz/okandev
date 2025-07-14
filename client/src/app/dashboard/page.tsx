@@ -7,10 +7,11 @@ import { useFetch } from "@/hooks/useFetch";
 import { AdminLayout } from "@/components/admin/AdminLayout";
 import DashboardContent from "@/components/admin/DashboardContent";
 import ProjectsContent from "@/components/admin/ProjectsContent";
+import MessageContent from "@/components/admin/MessageContent";
 
 export default function DashboardPage() {
   const router = useRouter();
-  const {  loading, error } = useFetch<{ message: string }>("/dashboard");
+  const { loading, error } = useFetch<{ message: string }>("/dashboard");
 
   const [activeKey, setActiveKey] = useState("dashboard");
 
@@ -23,14 +24,20 @@ export default function DashboardPage() {
 
   if (loading) return <p>Loading...</p>;
 
-  if (error) return null;
+  // Hata yönetimi
+  if (error)
+    return (
+      <p className="text-red-500">Something went wrong. Please try again.</p>
+    );
 
   let content;
   switch (activeKey) {
     case "projects":
       content = <ProjectsContent />;
       break;
-    case "dashboard":
+    case "messages":
+      content = <MessageContent />;
+      break;
     default:
       content = <DashboardContent />;
       break;

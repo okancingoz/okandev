@@ -1,4 +1,4 @@
-import { IMessage } from "@/interfaces/contact.interface";
+import { IMessage } from "@/interfaces/message.interface";
 import http from "@/services/http";
 
 export const sendMessage = async (

@@ -16,6 +16,7 @@ export function AdminLayout({
   const navItems = [
     { label: "Dashboard", key: "dashboard" },
     { label: "Projects", key: "projects" },
+    { label: "Messages", key: "messages" },
   ];
 
   return (

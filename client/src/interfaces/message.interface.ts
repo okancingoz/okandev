@@ -1,5 +1,5 @@
 export interface IMessage {
-  _id?: string;
+  _id: string;
   name: string;
   email: string;
   message: string;

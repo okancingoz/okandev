@@ -1,18 +1,34 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { IProject } from "@/interfaces/project.interface";
+import { createProject, updateProject } from "@/services/project.service";
 import http from "@/services/http";
-import { createProject } from "@/services/project.service";
 
-export function ProjectForm() {
+interface ProjectFormProps {
+  initialData?: IProject | null;
+  onSuccess: () => void; // Proje oluşturma/güncelleme sonrası listeyi yenilemek için
+}
+
+export function ProjectForm({ initialData, onSuccess }: ProjectFormProps) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState<File | null>(null);
+  const [existingImageUrl, setExistingImageUrl] = useState<string | null>(null);
   const [githubUrl, setGithubUrl] = useState("");
   const [liveUrl, setLiveUrl] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // Resmi ayrı upload eden fonksiyon
+  useEffect(() => {
+    if (initialData) {
+      setTitle(initialData.title || "");
+      setDescription(initialData.description || "");
+      setGithubUrl(initialData.githubUrl || "");
+      setLiveUrl(initialData.liveUrl || "");
+      setExistingImageUrl(initialData.imageUrl || null);
+    }
+  }, [initialData]);
+
   const handleImageUpload = async (file: File): Promise<string> => {
     const formData = new FormData();
     formData.append("image", file);
@@ -20,41 +36,52 @@ export function ProjectForm() {
     const res = await http.post("/upload/image", formData, {
       headers: { "Content-Type": "multipart/form-data" },
     });
-    // Backend’den dönen yapıya göre URL buradan alınıyor
+
     return res.data.data.imageUrl;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!image) {
-      alert("Please select an image.");
-      return;
-    }
-
     setLoading(true);
-    try {
-      // 1. Image upload et
-      const uploadedImageUrl = await handleImageUpload(image);
 
-      // 2. Proje oluştur
-      await createProject({
+    try {
+      let imageUrl = existingImageUrl;
+
+      if (image) {
+        imageUrl = await handleImageUpload(image);
+      }
+
+      const projectData: IProject = {
         title,
         description,
-        imageUrl: uploadedImageUrl,
-      });
+        imageUrl: imageUrl || "", // kesinlikle string olmalı
+        githubUrl,
+        liveUrl,
+      };
 
-      alert("Project added successfully!");
+      if (initialData?._id) {
+        await updateProject(initialData._id, projectData);
+        alert("Project updated successfully!");
+      } else {
+        await createProject(projectData);
+        alert("Project created successfully!");
+      }
 
-      // Form temizle
-      setTitle("");
-      setDescription("");
-      setImage(null);
-      setGithubUrl("");
-      setLiveUrl("");
+      // Temizle ve üst bileşeni bilgilendir
+      if (!initialData) {
+        setTitle("");
+        setDescription("");
+        setImage(null);
+        setGithubUrl("");
+        setLiveUrl("");
+        setExistingImageUrl(null);
+      }
+
+      onSuccess(); // Listeyi yenile
     } catch (error) {
       console.error(error);
-      alert("Error adding project.");
+      alert("Error submitting project.");
     } finally {
       setLoading(false);
     }
@@ -65,7 +92,9 @@ export function ProjectForm() {
       onSubmit={handleSubmit}
       className="bg-gray-900 p-6 rounded-md max-w-xl mx-auto space-y-4"
     >
-      <h2 className="text-xl font-bold text-white">Add New Project</h2>
+      <h2 className="text-xl font-bold text-white">
+        {initialData ? "Edit Project" : "Add New Project"}
+      </h2>
 
       <input
         type="text"
@@ -84,11 +113,19 @@ export function ProjectForm() {
         className="w-full px-4 py-2 rounded bg-gray-800 text-white"
       />
 
+      {/* image preview */}
+      {existingImageUrl && !image && (
+        <img
+          src={existingImageUrl}
+          alt="Preview"
+          className="w-full h-48 object-cover rounded border"
+        />
+      )}
+
       <input
         type="file"
         accept="image/*"
         onChange={(e) => setImage(e.target.files?.[0] ?? null)}
-        required
         className="w-full text-white"
       />
 
@@ -113,7 +150,13 @@ export function ProjectForm() {
         disabled={loading}
         className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded disabled:opacity-50"
       >
-        {loading ? "Loading..." : "Add Project"}
+        {loading
+          ? initialData
+            ? "Updating..."
+            : "Creating..."
+          : initialData
+          ? "Update Project"
+          : "Add Project"}
       </button>
     </form>
   );

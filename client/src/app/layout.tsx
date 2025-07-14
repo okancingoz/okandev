@@ -1,7 +1,16 @@
+/* eslint-disable @next/next/no-page-custom-font */
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ErrorProvider } from "@/context/error.context";
+import Head from "next/head"; // Head'yi import et
+import { Michroma } from "next/font/google";
+
+const michroma = Michroma({
+  subsets: ["latin"],
+  weight: "400", // Eğer belirli bir weight istiyorsan
+  style: "normal", // Eğer normal style kullanacaksan
+});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,8 +34,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <Head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Michroma&display=swap"
+          rel="stylesheet"
+        />
+      </Head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased font-sans ${michroma.className}`}
       >
         <ErrorProvider>{children}</ErrorProvider>
       </body>

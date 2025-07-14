@@ -1,12 +1,18 @@
 "use client";
 
-import { useFetch } from "@/hooks/useFetch";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useFetch } from "@/hooks/useFetch";
+
+import { AdminLayout } from "@/components/admin/AdminLayout";
+import DashboardContent from "@/components/admin/DashboardContent";
+import ProjectsContent from "@/components/admin/ProjectsContent";
 
 export default function DashboardPage() {
   const router = useRouter();
-  const { data, loading, error } = useFetch<{ message: string }>("/dashboard");
+  const {  loading, error } = useFetch<{ message: string }>("/dashboard");
+
+  const [activeKey, setActiveKey] = useState("dashboard");
 
   useEffect(() => {
     if (error) {
@@ -17,12 +23,22 @@ export default function DashboardPage() {
 
   if (loading) return <p>Loading...</p>;
 
-  if (error) return null; // veya hata mesajı göster
+  if (error) return null;
+
+  let content;
+  switch (activeKey) {
+    case "projects":
+      content = <ProjectsContent />;
+      break;
+    case "dashboard":
+    default:
+      content = <DashboardContent />;
+      break;
+  }
 
   return (
-    <div className="p-10 text-white">
-      <h1 className="text-2xl font-bold">Admin Panel</h1>
-      <p>{data?.message}</p>
-    </div>
+    <AdminLayout activeKey={activeKey} setActiveKey={setActiveKey}>
+      {content}
+    </AdminLayout>
   );
 }

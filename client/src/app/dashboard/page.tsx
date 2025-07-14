@@ -8,6 +8,7 @@ import { AdminLayout } from "@/components/admin/AdminLayout";
 import DashboardContent from "@/components/admin/DashboardContent";
 import ProjectsContent from "@/components/admin/ProjectsContent";
 import MessageContent from "@/components/admin/MessageContent";
+import AboutMeContent from "@/components/admin/AboutMeContent";
 
 export default function DashboardPage() {
   const router = useRouter();
@@ -37,6 +38,9 @@ export default function DashboardPage() {
       break;
     case "messages":
       content = <MessageContent />;
+      break;
+    case "about":
+      content = <AboutMeContent />;
       break;
     default:
       content = <DashboardContent />;

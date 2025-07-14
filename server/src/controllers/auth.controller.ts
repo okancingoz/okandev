@@ -36,7 +36,7 @@ export const loginUser = catchAsync(
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure: config.env === "production",
+      secure: false,
       sameSite: "lax",
       maxAge: 90 * 24 * 60 * 60 * 1000,
     });

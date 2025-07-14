@@ -6,11 +6,11 @@ export function middleware(request: NextRequest) {
 
   // 1. Token varsa login sayfasına gitmeye çalışıyorsa → /admin'e yönlendir
   if (token && pathname === "/login") {
-    return NextResponse.redirect(new URL("/admin", request.url));
+    return NextResponse.redirect(new URL("/dashboard", request.url));
   }
 
   // 2. Token yoksa ve /admin'e gitmeye çalışıyorsa → ana sayfaya yönlendir
-  if (!token && pathname.startsWith("/admin")) {
+  if (!token && pathname.startsWith("/dashboard")) {
     return NextResponse.redirect(new URL("/", request.url));
   }
 
@@ -19,5 +19,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/login", "/admin/:path*"],
+  matcher: ["/login", "/dashboard/:path*"],
 };

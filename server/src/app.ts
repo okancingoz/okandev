@@ -13,6 +13,7 @@ import uploadRoutes from "./routes/upload.routes";
 import helmet from "helmet";
 import compression from "compression";
 import rateLimit from "express-rate-limit";
+import cookieParser from "cookie-parser";
 
 // Importing the configuration
 const app: Application = express();
@@ -34,6 +35,8 @@ app.use(
   },
   express.static(path.join(__dirname, "../uploads"))
 );
+
+app.use(cookieParser());
 
 // Middleware setup
 // This middleware parses incoming requests with JSON payloads
@@ -61,7 +64,7 @@ if (process.env.NODE_ENV === "development") {
 
 // Routes
 app.use("/api/v1/auth", authRoutes);
-app.use("/api/v1/admin", adminRoutes);
+app.use("/api/v1/dashboard", adminRoutes);
 app.use("/api/v1/projects", projectRoutes);
 app.use("/api/v1/messages", messageRoutes);
 app.use("/api/v1/about", aboutRoutes);

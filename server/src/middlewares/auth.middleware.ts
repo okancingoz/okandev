@@ -26,7 +26,13 @@ export const protect = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     let token;
 
-    if (
+    // Firstly read from cookie
+    if (req.cookies && req.cookies.token) {
+      token = req.cookies.token;
+    }
+
+    // If there is no cookie read from header
+    else if (
       req.headers.authorization &&
       req.headers.authorization.startsWith("Bearer")
     ) {

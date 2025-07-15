@@ -1,12 +1,23 @@
-.navItem {
-  text-decoration: none;
+:global(.mobileMenuOverlay) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  width: 100vw;
+  max-width: 100vw;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
+/* Default desktop settings */
 .navBox {
   display: flex;
+  flex-direction: row;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0.6rem 1.2rem;
   border-radius: 32px;
   background: transparent;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.05),
@@ -14,49 +25,44 @@
   transition: all 0.3s ease;
 }
 
-.navBox:hover {
-  box-shadow: 6px 6px 14px rgba(0, 0, 0, 0.08),
-    -2px -2px 8px rgba(255, 255, 255, 0.8);
-  transform: translateY(-1px);
-}
-
 .icon {
   color: #333;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
+  font-size: 20px;
+  width: 24px;
+  min-width: 24px;
 }
 
 .label {
   font-size: 0.9rem;
+  display: flex;
   font-weight: 500;
   color: #111;
   transition: color 0.3s ease;
+  white-space: nowrap;
+  flex-grow: 1;
 }
 
-/* Responsive tweaks */
-@media (max-width: 768px) {
+/* Mobile phone */
+@media (max-width: 767px) {
   .navBox {
-    padding: 0.4rem 0.8rem;
-    border-radius: 20px;
+    width: 50%;
+    margin: 0 auto;
+  }
+
+  .mobileMenuOverlay {
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
   .label {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
   }
 
   .icon {
-    font-size: 16px;
-  }
-}
-
-@media (max-width: 480px) {
-  .navBox {
-    padding: 0.3rem 0.6rem;
-    gap: 0.4rem;
-  }
-
-  .label {
-    font-size: 0.8rem;
+    font-size: 20px;
   }
 }

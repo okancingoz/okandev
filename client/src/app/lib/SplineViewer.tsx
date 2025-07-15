@@ -45,6 +45,8 @@ export default function SplineViewer() {
 
         // Drag kontrolü için eventler
 
+        let isDragging = false;
+
         // Drag başla
         function onPointerDown(e: PointerEvent) {
           isDragging = true;
@@ -62,16 +64,33 @@ export default function SplineViewer() {
           updatePosition(e);
         }
 
+        // Touch start handler
+        function onTouchStart(e: TouchEvent) {
+          isDragging = true;
+          // İlk touch noktası ile pozisyonu güncelle
+          updatePosition(e.touches[0]);
+        }
+
+        // Touch end handler
+        function onTouchEnd() {
+          isDragging = false;
+        }
+
+        // Touch move handler
+        function onTouchMove(e: TouchEvent) {
+          if (!isDragging) return;
+          updatePosition(e.touches[0]);
+        }
+
         // Pozisyonu viewer'a bildir
-        function updatePosition(e: PointerEvent) {
+        function updatePosition(e: MouseEvent | Touch) {
           const viewerRect = viewer.getBoundingClientRect();
 
           // viewer içindeki relative pozisyonu al (0-1 arası normalize için)
           const x = e.clientX - viewerRect.left;
           const y = e.clientY - viewerRect.top;
 
-          // Burada istersen normalize edip Spline eventine gönderebilirsin
-          // Örneğin direkt mousemove eventi yaratabiliriz
+          // MouseEvent benzeri event yaratıp dispatch et
           const mouseEvent = new MouseEvent("mousemove", {
             clientX: e.clientX,
             clientY: e.clientY,
@@ -90,6 +109,12 @@ export default function SplineViewer() {
         viewer.addEventListener("pointerleave", onPointerUp);
         viewer.addEventListener("pointermove", onPointerMove);
 
+        // Touch event listener ekle
+        viewer.addEventListener("touchstart", onTouchStart, { passive: true });
+        viewer.addEventListener("touchend", onTouchEnd);
+        viewer.addEventListener("touchcancel", onTouchEnd);
+        viewer.addEventListener("touchmove", onTouchMove, { passive: true });
+
         // Cleanup
         return () => {
           viewer.removeEventListener("pointerdown", onPointerDown);
@@ -97,6 +122,11 @@ export default function SplineViewer() {
           viewer.removeEventListener("pointercancel", onPointerUp);
           viewer.removeEventListener("pointerleave", onPointerUp);
           viewer.removeEventListener("pointermove", onPointerMove);
+
+          viewer.removeEventListener("touchstart", onTouchStart);
+          viewer.removeEventListener("touchend", onTouchEnd);
+          viewer.removeEventListener("touchcancel", onTouchEnd);
+          viewer.removeEventListener("touchmove", onTouchMove);
         };
       }
     };

@@ -1,15 +1,15 @@
 /* eslint-disable @next/next/no-page-custom-font */
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import "@/styles/base/globals.css";
 import { ErrorProvider } from "@/context/error.context";
 import Head from "next/head"; // Head'yi import et
-import { Michroma } from "next/font/google";
+import { Roboto } from "next/font/google";
 
-const michroma = Michroma({
+const roboto = Roboto({
   subsets: ["latin"],
-  weight: "400", // Eğer belirli bir weight istiyorsan
-  style: "normal", // Eğer normal style kullanacaksan
+  weight: "400",
+  style: "normal",
 });
 
 const geistSans = Geist({
@@ -42,12 +42,12 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=Michroma&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
           rel="stylesheet"
         />
       </Head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased font-sans ${michroma.className}`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased font-sans ${roboto.className}`}
       >
         <ErrorProvider>{children}</ErrorProvider>
       </body>

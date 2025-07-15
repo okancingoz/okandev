@@ -6,16 +6,16 @@
 /* Global renkler ve font ayarları */
 :root {
   --background: #ffffff;
-  --foreground: #171717;
-  --font-sans: "Michroma", sans-serif;
+  --foreground: #fff;
+  --font-sans: "Roboto", sans-serif;
   --font-mono: "Courier New", monospace;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #fff;
     --foreground: #ededed;
-    --font-sans: "Michroma", sans-serif;
+    --font-sans: "Roboto", sans-serif;
   }
 }
 

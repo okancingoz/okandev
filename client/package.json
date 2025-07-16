@@ -6,25 +6,28 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "build:analyze": "cross-env ANALYZE=true next build"
   },
   "dependencies": {
-    "@next/font": "^14.2.15",
-    "@splinetool/react-spline": "^4.0.0",
-    "@splinetool/runtime": "^1.10.29",
+    "@splinetool/react-spline": "^4.1.0",
     "@tailwindcss/postcss": "^4.1.11",
     "autoprefixer": "^10.4.21",
     "axios": "^1.10.0",
     "keen-slider": "^6.8.6",
+    "lottie-react": "^2.4.1",
     "next": "^15.3.5",
     "postcss": "^8.5.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.5.0",
+    "swiper": "^11.2.10",
     "tailwindcss": "^4.1.11"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@next/bundle-analyzer": "^15.4.1",
+    "@tailwindcss/line-clamp": "^0.4.4",
     "@types/react": "^19"
   }
 }

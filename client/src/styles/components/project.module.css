@@ -1,0 +1,19 @@
+.swiper-slide {
+  transition: transform 0.3s ease, filter 0.3s ease, z-index 0.3s ease;
+  transform: scale(0.85) rotateY(0deg);
+  filter: grayscale(50%) blur(1px);
+  z-index: 1;
+}
+
+.swiper-slide-active {
+  transform: scale(1.05) rotateY(0deg) !important;
+  filter: grayscale(0%) blur(0) !important;
+  z-index: 10 !important;
+}
+
+.swiper-slide-prev,
+.swiper-slide-next {
+  transform: scale(0.9) rotateY(-4deg);
+  filter: grayscale(30%) blur(0.5px);
+  z-index: 5;
+}

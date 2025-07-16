@@ -1,52 +1,95 @@
-import { useKeenSlider } from "keen-slider/react";
-import "keen-slider/keen-slider.min.css";
+"use client";
 
+import React, { useRef } from "react";
 import { useFetch } from "@/hooks/useFetch";
-import { IProject } from "@/types/project.types";
+import { IProject } from "@/interfaces/project.interface";
 import { ProjectCard } from "./ProjectCard";
 
+import { Swiper, SwiperSlide } from "swiper/react";
+import { EffectCoverflow, Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/effect-coverflow";
+import "swiper/css/autoplay";
+import "@/styles/components/project.module.css";
+
 export function ProjectsSection() {
-  const [sliderRef] = useKeenSlider<HTMLDivElement>({
-    loop: true,
-    slides: {
-      perView: 1.25,
-      spacing: 16,
-    },
-    breakpoints: {
-      "(min-width: 768px)": {
-        slides: { perView: 2.5, spacing: 24 },
-      },
-      "(min-width: 1024px)": {
-        slides: { perView: 3.5, spacing: 32 },
-      },
-    },
-  });
-
-  const { data, loading, error } = useFetch<{
-    status: string;
-    data: {
-      projects: IProject[];
-    };
-  }>("/projects");
-
-  if (loading) return <div className="text-white">Loading projects...</div>;
-  if (error) return <div className="text-red-500">{error}</div>;
-
+  const { data, loading, error } = useFetch<{ data: { projects: IProject[] } }>(
+    "/projects"
+  );
   const projects = data?.data.projects || [];
 
-  if (projects.length === 0)
-    return <div className="text-white">No projects found.</div>;
+  const swiperRef = useRef<any>(null);
+
+  if (loading)
+    return (
+      <div className="h-screen flex items-center justify-center bg-[#f6f6f6] text-gray-600">
+        Loading projects…
+      </div>
+    );
+
+  if (error || projects.length === 0)
+    return (
+      <div className="h-screen flex items-center justify-center bg-[#f6f6f6] text-gray-600">
+        No projects found.
+      </div>
+    );
+
+  const handleSlideClick = (index: number) => {
+    if (swiperRef.current && swiperRef.current.swiper) {
+      swiperRef.current.swiper.slideToLoop(index);
+    }
+  };
 
   return (
-    <section id="projects" className="px-4 py-16 bg-black">
-      <h2 className="text-3xl text-white font-bold mb-8 text-center">
+    <section
+      id="projects"
+      className="h-screen bg-[#f6f6f6] flex flex-col items-center justify-center px-4"
+    >
+      <h2 className="text-4xl font-bold text-gray-800 mb-16 text-center w-full max-w-[1280px]">
         Projects
       </h2>
 
-      <div ref={sliderRef} className="keen-slider">
-        {projects.map((project) => (
-          <ProjectCard key={project._id} project={project} />
-        ))}
+      <div className="w-full max-w-[1280px] mx-auto">
+        <Swiper
+          ref={swiperRef}
+          effect="coverflow"
+          loop
+          grabCursor
+          centeredSlides
+          slidesPerView={3}
+          autoplay={{ delay: 5000, disableOnInteraction: false }}
+          modules={[EffectCoverflow, Autoplay]}
+          coverflowEffect={{
+            slideShadows: false,
+            depth: 100,
+          }}
+          breakpoints={{
+            0: {
+              slidesPerView: 1.5,
+              spaceBetween: 0,
+              grabCursor: true,
+            },
+            640: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
+            1024: {
+              slidesPerView: 3,
+              spaceBetween: 30,
+            },
+          }}
+          className="w-full"
+        >
+          {projects.map((project, i) => (
+            <SwiperSlide
+              key={project._id}
+              className="flex justify-center cursor-pointer"
+              onClick={() => handleSlideClick(i)}
+            >
+              <ProjectCard project={project} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
     </section>
   );

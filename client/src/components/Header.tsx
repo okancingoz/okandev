@@ -22,9 +22,9 @@ export default function Header() {
 
   return (
     <header
-      className="fixed z-50 top-10 left-4 right-4 mx-auto max-w-screen-xl px-6 py-4 md:px-10 flex items-center justify-between rounded-[50px] transition-all duration-300"
+      className="fixed z-50 top-10 left-4 right-4 mx-auto max-w-screen-xl px-6 py-4 md:px-10 flex items-center justify-between rounded-[32px] transition-all duration-300"
       style={{
-        background: "#e8e8e8",
+        background: "#f5f5f5",
         boxShadow:
           "inset 20px 20px 60px #c5c5c5, inset -20px -20px 60px #ffffff",
       }}

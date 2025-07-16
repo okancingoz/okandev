@@ -25,6 +25,21 @@
   transition: all 0.3s ease;
 }
 
+.navBox:hover {
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: inset 6px 6px 12px rgba(0, 0, 0, 0.06),
+    inset -6px -6px 12px rgba(255, 255, 255, 0.4);
+  transform: translateY(1px);
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.navBox:active {
+  transform: translateY(2px);
+  box-shadow: inset 8px 8px 14px rgba(0, 0, 0, 0.08),
+    inset -8px -8px 14px rgba(255, 255, 255, 0.3);
+}
+
 .icon {
   color: #333;
   display: flex;
@@ -35,7 +50,9 @@
   width: 24px;
   min-width: 24px;
 }
-
+.icon:hover {
+  color: #000;
+}
 .label {
   font-size: 0.9rem;
   display: flex;
@@ -44,6 +61,10 @@
   transition: color 0.3s ease;
   white-space: nowrap;
   flex-grow: 1;
+}
+
+.label:hover {
+  color: #000;
 }
 
 /* Mobile phone */
@@ -64,5 +85,24 @@
 
   .icon {
     font-size: 20px;
+  }
+}
+
+/* Tablet */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .navBox {
+    gap: 0.75rem;
+    padding: 0.5rem 1rem;
+    max-width: 260px;
+  }
+
+  .label {
+    font-size: 0.9rem;
+  }
+
+  .icon {
+    font-size: 18px;
+    width: 22px;
+    min-width: 22px;
   }
 }

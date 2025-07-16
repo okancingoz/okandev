@@ -41,6 +41,12 @@ export function ProjectForm({ initialData, onSuccess }: ProjectFormProps) {
     return res.data.data.imageUrl;
   };
 
+  const normalizeUrl = (url: string) => {
+    if (!url) return "";
+    if (url.startsWith("http://") || url.startsWith("https://")) return url;
+    return "https://" + url;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -56,9 +62,9 @@ export function ProjectForm({ initialData, onSuccess }: ProjectFormProps) {
       const projectData: IProject = {
         title,
         description,
-        imageUrl: imageUrl || "", // kesinlikle string olmalı
-        githubUrl,
-        liveUrl,
+        imageUrl: imageUrl || "",
+        githubUrl: normalizeUrl(githubUrl),
+        liveUrl: normalizeUrl(liveUrl),
       };
 
       if (initialData?._id) {
@@ -69,7 +75,6 @@ export function ProjectForm({ initialData, onSuccess }: ProjectFormProps) {
         alert("Project created successfully!");
       }
 
-      // Temizle ve üst bileşeni bilgilendir
       if (!initialData) {
         setTitle("");
         setDescription("");
@@ -79,7 +84,7 @@ export function ProjectForm({ initialData, onSuccess }: ProjectFormProps) {
         setExistingImageUrl(null);
       }
 
-      onSuccess(); // Listeyi yenile
+      onSuccess();
     } catch (error) {
       console.error(error);
       alert("Error submitting project.");

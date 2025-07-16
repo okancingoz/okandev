@@ -29,13 +29,11 @@ export default function Header() {
           "inset 20px 20px 60px #c5c5c5, inset -20px -20px 60px #ffffff",
       }}
     >
-      <div
-        className="text-xl md:text-2xl font-semibold text-[#111] select-none"
-        style={{ textShadow: "1px 1px 2px rgba(0,0,0,0.05)" }}
-      >
-        okandev
+      <div>
+        <h1 className="text-xl md:text-2xl font-semibold text-gray-900">
+          okandev
+        </h1>
       </div>
-
       {/* Desktop & Tablet Nav */}
       <nav className="hidden md:flex items-center gap-6 lg:gap-8">
         {navItems.map((item) => (

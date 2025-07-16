@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@splinetool/react-spline": "^4.1.0",
-    "@tailwindcss/postcss": "^4.1.11",
+    "@splinetool/viewer": "^1.10.32",
     "autoprefixer": "^10.4.21",
     "axios": "^1.10.0",
     "keen-slider": "^6.8.6",
@@ -28,6 +28,7 @@
     "@eslint/eslintrc": "^3",
     "@next/bundle-analyzer": "^15.4.1",
     "@tailwindcss/line-clamp": "^0.4.4",
+    "@tailwindcss/postcss": "^4.1.11",
     "@types/react": "^19"
   }
 }

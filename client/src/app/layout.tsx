@@ -4,7 +4,6 @@ import localFont from "next/font/local";
 import "@/styles/base/globals.css";
 import { ErrorProvider } from "@/context/error.context";
 
-
 const roboto = localFont({
   src: [
     {
@@ -12,7 +11,6 @@ const roboto = localFont({
       weight: "500",
       style: "normal",
     },
-
     {
       path: "../fonts/roboto/static/Roboto-Light.ttf",
       weight: "400",
@@ -34,8 +32,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={`${roboto.variable} font-sans antialiased`}>
+    <html lang="en" className={roboto.variable}>
+      <body className="font-sans antialiased">
         <ErrorProvider>{children}</ErrorProvider>
       </body>
     </html>

@@ -12,19 +12,19 @@
   :root {
     --background: #b4b4b4;
     --foreground: #b4b4b4;
-    --font-sans: "Roboto", sans-serif;
   }
 }
+
 * {
   box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
-}
-
-html {
-  scroll-behavior: smooth;
 }

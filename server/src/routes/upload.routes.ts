@@ -1,6 +1,6 @@
 import express, { Request, Response, NextFunction } from "express";
-import { protect } from "../middlewares/auth.middleware"; // senin auth middleware’in
-import upload from "../middlewares/upload.middleware"; // yukarıdaki multer config’in
+import { protect } from "../middlewares/auth.middleware"; 
+import upload from "../middlewares/upload.middleware"; 
 import { optimizeImageFromBuffer } from "../utils/optimize-image";
 import path from "path";
 

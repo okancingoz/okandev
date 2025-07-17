@@ -8,7 +8,7 @@ const nextConfig: NextConfig = withBundleAnalyzer({
     return [
       {
         source: "/dashboard",
-        destination: "http://localhost:5000/api/v1/dashboard",
+        destination: "https://okandev.onrender.com/api/v1/dashboard",
       },
     ];
   },
@@ -16,9 +16,8 @@ const nextConfig: NextConfig = withBundleAnalyzer({
   images: {
     remotePatterns: [
       {
-        protocol: "http",
-        hostname: "localhost",
-        port: "5000",
+        protocol: "https",
+        hostname: "okandev.onrender.com",
         pathname: "/uploads/**",
       },
     ],

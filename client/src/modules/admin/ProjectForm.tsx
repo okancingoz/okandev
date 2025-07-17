@@ -8,7 +8,7 @@ import http from "@/services/http";
 
 interface ProjectFormProps {
   initialData?: IProject | null;
-  onSuccess: () => void; // Proje oluşturma/güncelleme sonrası listeyi yenilemek için
+  onSuccess: () => void; 
 }
 
 export function ProjectForm({ initialData, onSuccess }: ProjectFormProps) {

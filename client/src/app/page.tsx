@@ -1,10 +1,11 @@
 "use client";
 
-import dynamic from "next/dynamic";
-import AboutMe from "@/components/AboutMe";
 import Header from "@/components/Header";
+import AboutMe from "@/modules/aboutme/AboutMe";
 import { ContactSection } from "@/modules/contact";
 import { ProjectsSection } from "@/modules/projects";
+import TechStack from "@/modules/techs/TechStack";
+import dynamic from "next/dynamic";
 
 const SplineViewer = dynamic(() => import("./lib/SplineViewer"), {
   ssr: false,
@@ -18,10 +19,11 @@ const SplineViewer = dynamic(() => import("./lib/SplineViewer"), {
 export default function HomePage() {
   return (
     <div className="relative min-h-screen w-full">
-      <Header />
       <SplineViewer />
+      <Header />
       <AboutMe />
       <ProjectsSection />
+      <TechStack />
       <ContactSection />
     </div>
   );

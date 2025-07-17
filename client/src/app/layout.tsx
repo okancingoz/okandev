@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-page-custom-font */
+import { ErrorProvider } from "@/context/error.context";
+import "@/styles/base/globals.css";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import "@/styles/base/globals.css";
-import { ErrorProvider } from "@/context/error.context";
 
 const roboto = localFont({
   src: [
@@ -33,6 +33,22 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={roboto.variable}>
+      <head>
+        <link
+          rel="preload"
+          href="/_next/static/media/Roboto_Bold-s.p.21db0d56.ttf"
+          as="font"
+          type="font/ttf"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/_next/static/media/Roboto_Light-s.p.5f11f909.ttf"
+          as="font"
+          type="font/ttf"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body className="font-sans antialiased">
         <ErrorProvider>{children}</ErrorProvider>
       </body>

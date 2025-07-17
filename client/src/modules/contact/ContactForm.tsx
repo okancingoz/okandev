@@ -1,5 +1,6 @@
 "use client";
 
+import { FaUser, FaEnvelope, FaComment } from "react-icons/fa";
 import { sendMessage } from "@/services/contact.service";
 import { useState, useEffect } from "react";
 
@@ -62,7 +63,6 @@ const ContactForm: React.FC = () => {
     }
   };
 
-  // Mesajlar 3 saniye sonra kaybolacak
   useEffect(() => {
     if (success) {
       const timer = setTimeout(() => setSuccess(false), 3000);
@@ -80,37 +80,49 @@ const ContactForm: React.FC = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="max-w-3xl w-full bg-white/30 backdrop-blur-md rounded-xl p-8 shadow-lg mx-auto flex flex-col gap-5"
+      className="max-w-3xl w-full bg-white/50 backdrop-blur-md rounded-xl p-8 shadow-lg mx-auto flex flex-col gap-5"
     >
-      <input
-        type="text"
-        name="name"
-        placeholder="Your name"
-        value={formData.name}
-        onChange={handleChange}
-        className="px-4 py-2 rounded-md bg-white/80 text-gray-900 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-        disabled={loading}
-      />
+      {/* Name input with icon */}
+      <div className="relative">
+        <FaUser className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+        <input
+          type="text"
+          name="name"
+          placeholder="Your name"
+          value={formData.name}
+          onChange={handleChange}
+          className="pl-10 pr-4 py-2 rounded-md bg-white/80 text-gray-900 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition w-full"
+          disabled={loading}
+        />
+      </div>
 
-      <input
-        type="email"
-        name="email"
-        placeholder="Your email"
-        value={formData.email}
-        onChange={handleChange}
-        className="px-4 py-2 rounded-md bg-white/80 text-gray-900 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-        disabled={loading}
-      />
+      {/* Email input with icon */}
+      <div className="relative">
+        <FaEnvelope className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+        <input
+          type="email"
+          name="email"
+          placeholder="Your email"
+          value={formData.email}
+          onChange={handleChange}
+          className="pl-10 pr-4 py-2 rounded-md bg-white/80 text-gray-900 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition w-full"
+          disabled={loading}
+        />
+      </div>
 
-      <textarea
-        name="message"
-        placeholder="Your message"
-        value={formData.message}
-        onChange={handleChange}
-        rows={5}
-        className="px-4 py-2 rounded-md bg-white/50 text-gray-900 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none"
-        disabled={loading}
-      />
+      {/* Message textarea with icon */}
+      <div className="relative">
+        <FaComment className="absolute left-3 top-4 text-gray-400 pointer-events-none" />
+        <textarea
+          name="message"
+          placeholder="Your message"
+          value={formData.message}
+          onChange={handleChange}
+          rows={5}
+          className="pl-10 pr-4 py-2 rounded-md bg-white/50 text-gray-900 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none transition w-full"
+          disabled={loading}
+        />
+      </div>
 
       {error && (
         <p className="bg-red-100 text-red-700 rounded-md px-4 py-2 font-semibold transition-opacity duration-500">

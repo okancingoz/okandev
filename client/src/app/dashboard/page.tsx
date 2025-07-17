@@ -4,11 +4,11 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useFetch } from "@/hooks/useFetch";
 
-import { AdminLayout } from "@/components/admin/AdminLayout";
-import DashboardContent from "@/components/admin/DashboardContent";
-import ProjectsContent from "@/components/admin/ProjectsContent";
-import MessageContent from "@/components/admin/MessageContent";
-import AboutMeContent from "@/components/admin/AboutMeContent";
+import { AdminLayout } from "@/modules/admin/AdminLayout";
+import DashboardContent from "@/modules/admin/DashboardContent";
+import ProjectsContent from "@/modules/admin/ProjectsContent";
+import MessageContent from "@/modules/admin/MessageContent";
+import AboutMeContent from "@/modules/admin/AboutMeContent";
 
 export default function DashboardPage() {
   const router = useRouter();

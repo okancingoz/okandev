@@ -1,15 +1,24 @@
 "use client";
 
-import Link from "next/link";
-import { useState, useEffect } from "react";
-import { FiHome, FiUser, FiFolder, FiMail, FiMenu, FiX } from "react-icons/fi";
 import styles from "@/styles/components/header.module.css";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import {
+  FiCode,
+  FiFolder,
+  FiHome,
+  FiMail,
+  FiMenu,
+  FiUser,
+  FiX,
+} from "react-icons/fi";
 
 const navItems = [
   { label: "Home", href: "#home", icon: <FiHome size={18} /> },
-  { label: "About me", href: "#about", icon: <FiUser size={18} /> },
+  { label: "About", href: "#about", icon: <FiUser size={18} /> },
   { label: "Projects", href: "#projects", icon: <FiFolder size={18} /> },
-  { label: "Contact me", href: "#contact", icon: <FiMail size={18} /> },
+  { label: "Techs", href: "#techstacks", icon: <FiCode size={18} /> },
+  { label: "Contact", href: "#contact", icon: <FiMail size={18} /> },
 ];
 
 export default function Header() {
@@ -22,7 +31,7 @@ export default function Header() {
 
   return (
     <header
-      className="fixed z-50 top-10 left-4 right-4 mx-auto max-w-screen-xl px-6 py-4 md:px-10 flex items-center justify-between rounded-[32px] transition-all duration-300"
+      className="fixed  z-50 top-10 left-4 right-4 mx-auto max-w-screen-xl px-6 py-4 md:px-10 flex items-center justify-between rounded-[32px] transition-all duration-300"
       style={{
         background: "#f5f5f5",
         boxShadow:
@@ -35,7 +44,7 @@ export default function Header() {
         </h1>
       </div>
       {/* Desktop & Tablet Nav */}
-      <nav className="hidden md:flex items-center gap-6 lg:gap-8">
+      <nav className="hidden md:flex items-center gap-4 lg:gap-8">
         {navItems.map((item) => (
           <Link key={item.href} href={item.href} className={styles.navItem}>
             <div className={styles.navBox}>

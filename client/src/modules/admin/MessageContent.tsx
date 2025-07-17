@@ -10,7 +10,7 @@ export default function MessageContent() {
   const fetchMessages = async () => {
     try {
       const response = await getAllMessages();
-      // Burada doğru veri yolunu kullanıyoruz: response.data.messages
+     
       setMessages(response.data.data.messages);
     } catch (error) {
       console.error("Error fetching messages:", error);
@@ -25,7 +25,7 @@ export default function MessageContent() {
 
     try {
       await deleteMessage(id);
-      fetchMessages(); // Mesaj silindikten sonra verileri tekrar çek
+      fetchMessages(); 
     } catch (error) {
       console.error("Error deleting message:", error);
     }

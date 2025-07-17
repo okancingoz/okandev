@@ -6,5 +6,5 @@ export const getAboutMe = () => {
 };
 
 export const updateAboutMe = (data: IAbout) => {
-  return http.put<{ data: { about: IAbout } }>("/about", data); // response.data.about üzerinden veriyi alacağız
+  return http.put<{ data: { about: IAbout } }>("/about", data); // 
 };

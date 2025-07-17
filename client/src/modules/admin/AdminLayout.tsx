@@ -17,7 +17,7 @@ export function AdminLayout({
     { label: "Dashboard", key: "dashboard" },
     { label: "Projects", key: "projects" },
     { label: "Messages", key: "messages" },
-    { label: "About Me", key: "about" }, // About Me ekledik
+    { label: "About Me", key: "about" }, 
   ];
 
   return (

@@ -4,7 +4,7 @@
 import { useState, useEffect } from "react";
 import { deleteProject } from "@/services/project.service";
 import { IProject } from "@/interfaces/project.interface";
-import { ProjectForm } from "@/app/dashboard/projects/ProjectForm";
+import { ProjectForm } from "@/modules/admin/ProjectForm";
 import { useFetch } from "@/hooks/useFetch";
 
 export default function ProjectsContent() {
@@ -18,15 +18,15 @@ export default function ProjectsContent() {
   const [editingProject, setEditingProject] = useState<IProject | null>(null);
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
-  // On submit success, set submitSuccess to true and refetch data
+ 
   const onSuccess = () => {
     setEditingProject(null);
-    setSubmitSuccess(true);  // Mark that submit was successful
-    refetch(); // Fetch new project list
+    setSubmitSuccess(true);  
+    refetch();
   };
 
   useEffect(() => {
-    // If submit was successful, reset submitSuccess flag
+  
     if (submitSuccess) {
       setSubmitSuccess(false);
     }
@@ -36,7 +36,7 @@ export default function ProjectsContent() {
     if (!confirm("Are you sure you want to delete this project?")) return;
     try {
       await deleteProject(id);
-      refetch(); // Refetch after deletion
+      refetch(); 
     } catch (error) {
       console.error("Error deleting project:", error);
     }

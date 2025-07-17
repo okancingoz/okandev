@@ -9,32 +9,31 @@ export default function AboutMeContent() {
   const [isEditing, setIsEditing] = useState(false);
   const [newText, setNewText] = useState("");
 
-  // Veri çekme fonksiyonu
+ 
   const fetchAboutMe = async () => {
     try {
       const response = await getAboutMe();
-      // Veri doğru şekilde alındıktan sonra state güncelleniyor
+    
       const fetchedAbout = response.data.data.about;
       setAboutMe(fetchedAbout); 
-      setNewText(fetchedAbout.content); // İçeriği yeni metne ekliyoruz
+      setNewText(fetchedAbout.content); 
     } catch (error) {
       console.error("Error fetching about me:", error);
     }
   };
 
-  // Güncelleme işlemi
+ 
   const handleUpdate = async () => {
-    if (!newText.trim()) return; // Boş metin girilmesine izin verme
+    if (!newText.trim()) return;
 
     if (aboutMe) {
       try {
-        const updatedData = { ...aboutMe, content: newText }; // content güncelleniyor
-        // Güncellenen veriyi hemen state'de yansıtıyoruz
+        const updatedData = { ...aboutMe, content: newText }; 
         setAboutMe(updatedData);
         
-        // API'ye güncellenmiş veriyi gönderiyoruz
+       
         await updateAboutMe(updatedData);
-        setIsEditing(false); // Düzenleme modunu sonlandırıyoruz
+        setIsEditing(false); 
       } catch (error) {
         console.error("Error updating about me:", error);
       }

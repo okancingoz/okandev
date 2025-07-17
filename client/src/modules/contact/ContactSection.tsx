@@ -1,7 +1,8 @@
 "use client";
 
+import SectionTitle from "@/components/SectionTitle";
+import { FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
 import ContactForm from "./ContactForm";
-import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 
 const ContactSection: React.FC = () => {
   return (
@@ -9,9 +10,7 @@ const ContactSection: React.FC = () => {
       id="contact"
       className="bg-[#f6f6f6] min-h-[40vh] flex flex-col items-center justify-center px-6 py-12 relative z-10 border-t border-gray-300"
     >
-      <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-10 text-center">
-        Contact Me
-      </h2>
+      <SectionTitle>Contact Me</SectionTitle>
 
       <ContactForm />
 
@@ -21,7 +20,8 @@ const ContactSection: React.FC = () => {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="GitHub"
-          className="text-gray-600 hover:text-gray-900 transition-colors text-3xl"
+          className="text-gray-600 hover:text-gray-900 transition-colors text-3xl flex items-center"
+          title="GitHub"
         >
           <FaGithub />
         </a>
@@ -30,14 +30,16 @@ const ContactSection: React.FC = () => {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="LinkedIn"
-          className="text-gray-600 hover:text-gray-900 transition-colors text-3xl"
+          className="text-gray-600 hover:text-gray-900 transition-colors text-3xl flex items-center"
+          title="LinkedIn"
         >
           <FaLinkedin />
         </a>
         <a
-          href="mailto:okancingoz@example.com"
+          href="mailto:okanc.ngoz@gmail.com"
           aria-label="Email"
-          className="text-gray-600 hover:text-gray-900 transition-colors text-3xl"
+          className="text-gray-600 hover:text-gray-900 transition-colors text-3xl flex items-center"
+          title="Email"
         >
           <FaEnvelope />
         </a>

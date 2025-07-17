@@ -17,3 +17,29 @@
   filter: grayscale(30%) blur(0.5px);
   z-index: 5;
 }
+
+.scrollable-text {
+  overflow-y: auto;
+  max-height: 14rem;
+
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+}
+
+.scrollable-text::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.scrollable-text:hover {
+  scrollbar-width: thin;
+}
+
+.scrollable-text:hover::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollable-text:hover::-webkit-scrollbar-thumb {
+  background-color: rgba(100, 100, 100, 0.5);
+  border-radius: 3px;
+}

@@ -1,16 +1,17 @@
 "use client";
 
-import React, { useRef } from "react";
 import { useFetch } from "@/hooks/useFetch";
 import { IProject } from "@/interfaces/project.interface";
+import { useRef } from "react";
 import { ProjectCard } from "./ProjectCard";
 
-import { Swiper, SwiperSlide } from "swiper/react";
-import { EffectCoverflow, Autoplay } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/effect-coverflow";
-import "swiper/css/autoplay";
+import SectionTitle from "@/components/SectionTitle";
 import "@/styles/components/project.module.css";
+import "swiper/css";
+import "swiper/css/autoplay";
+import "swiper/css/effect-coverflow";
+import { Autoplay, EffectCoverflow } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 export function ProjectsSection() {
   const { data, loading, error } = useFetch<{ data: { projects: IProject[] } }>(
@@ -45,10 +46,7 @@ export function ProjectsSection() {
       id="projects"
       className="h-screen bg-[#f6f6f6] flex flex-col items-center justify-center px-4"
     >
-      <h2 className="text-4xl font-bold text-gray-800 mb-16 text-center w-full max-w-[1280px]">
-        Projects
-      </h2>
-
+      <SectionTitle>Projects</SectionTitle>
       <div className="w-full max-w-[1280px] mx-auto">
         <Swiper
           ref={swiperRef}

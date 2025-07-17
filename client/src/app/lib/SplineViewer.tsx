@@ -10,30 +10,35 @@ export default function SplineViewer() {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setShouldLoad(true);
-          observer.disconnect(); // Bir kere tetiklenmesi yeterli
+          if ("requestIdleCallback" in window) {
+            requestIdleCallback(() => setShouldLoad(true), { timeout: 2000 });
+          } else {
+            setShouldLoad(true);
+          }
+          observer.disconnect();
         }
       },
-      { threshold: 0.1 } // %10 görünür olunca yükle
+      {
+        threshold: 0.1,
+        rootMargin: "200px",
+      }
     );
 
     if (containerRef.current) {
       observer.observe(containerRef.current);
     }
 
-    return () => {
-      observer.disconnect();
-    };
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
     if (!shouldLoad) return;
 
-    if (document.querySelector('script[data-spline="true"]')) return;
+    if (document.head.querySelector('script[data-spline="true"]')) return;
 
     const script = document.createElement("script");
     script.type = "module";
-    script.src = "https://unpkg.com/@splinetool/viewer/build/spline-viewer.js"; 
+    script.src = "https://unpkg.com/@splinetool/viewer/build/spline-viewer.js";
     script.setAttribute("data-spline", "true");
 
     script.onload = () => {
@@ -43,15 +48,14 @@ export default function SplineViewer() {
       ) {
         const viewer = document.createElement("spline-viewer");
 
-        viewer.setAttribute(
-          "url",
-          "https://prod.spline.design/vXMKbBczk6-YqPAb/scene.splinecode"
-        );
+        viewer.setAttribute("url", "/home.splinecode");
         viewer.setAttribute("loading-anim-type", "spinner-small-dark");
 
-        viewer.style.width = "100%";
-        viewer.style.height = "100vh";
-        viewer.style.display = "block";
+        Object.assign(viewer.style, {
+          width: "100%",
+          height: "100vh",
+          display: "block",
+        });
 
         containerRef.current.appendChild(viewer);
 
@@ -63,12 +67,10 @@ export default function SplineViewer() {
           }
         }, 10);
 
-        // Drag işlemleri
+        // Drag Events
         let isDragging = false;
 
-        function updatePosition(e: MouseEvent | Touch) {
-          const viewerRect = viewer.getBoundingClientRect();
-
+        const updatePosition = (e: MouseEvent | Touch) => {
           const mouseEvent = new MouseEvent("mousemove", {
             clientX: e.clientX,
             clientY: e.clientY,
@@ -76,64 +78,49 @@ export default function SplineViewer() {
             cancelable: true,
             view: window,
           });
-
           viewer.dispatchEvent(mouseEvent);
-        }
+        };
 
-        function onPointerDown(e: PointerEvent) {
+        viewer.addEventListener("pointerdown", (e) => {
           isDragging = true;
           updatePosition(e);
-        }
+        });
+        viewer.addEventListener("pointermove", (e) => {
+          if (isDragging) updatePosition(e);
+        });
+        viewer.addEventListener("pointerup", () => (isDragging = false));
+        viewer.addEventListener("pointerleave", () => (isDragging = false));
 
-        function onPointerUp() {
-          isDragging = false;
-        }
-
-        function onPointerMove(e: PointerEvent) {
-          if (!isDragging) return;
-          updatePosition(e);
-        }
-
-        function onTouchStart(e: TouchEvent) {
-          isDragging = true;
-          updatePosition(e.touches[0]);
-        }
-
-        function onTouchEnd() {
-          isDragging = false;
-        }
-
-        function onTouchMove(e: TouchEvent) {
-          if (!isDragging) return;
-          updatePosition(e.touches[0]);
-        }
-
-        viewer.addEventListener("pointerdown", onPointerDown);
-        viewer.addEventListener("pointerup", onPointerUp);
-        viewer.addEventListener("pointercancel", onPointerUp);
-        viewer.addEventListener("pointerleave", onPointerUp);
-        viewer.addEventListener("pointermove", onPointerMove);
-
-        viewer.addEventListener("touchstart", onTouchStart, { passive: true });
-        viewer.addEventListener("touchend", onTouchEnd);
-        viewer.addEventListener("touchcancel", onTouchEnd);
-        viewer.addEventListener("touchmove", onTouchMove, { passive: true });
+        viewer.addEventListener(
+          "touchstart",
+          (e) => {
+            isDragging = true;
+            updatePosition(e.touches[0]);
+          },
+          { passive: true }
+        );
+        viewer.addEventListener(
+          "touchmove",
+          (e) => {
+            if (isDragging) updatePosition(e.touches[0]);
+          },
+          { passive: true }
+        );
+        viewer.addEventListener("touchend", () => (isDragging = false));
       }
     };
 
-    document.body.appendChild(script);
+    document.head.appendChild(script);
 
     return () => {
-      if (containerRef.current) {
-        containerRef.current.innerHTML = "";
-      }
+      containerRef.current?.replaceChildren();
     };
   }, [shouldLoad]);
 
   return (
     <div ref={containerRef} className="w-full h-screen">
       {!shouldLoad && (
-        <div className="w-full h-full flex items-center justify-center text-white">
+        <div className="w-full h-full animate-pulse bg-neutral-900 text-white flex items-center justify-center">
           Loading 3D scene...
         </div>
       )}

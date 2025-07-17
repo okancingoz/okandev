@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import SectionTitle from "@/components/SectionTitle";
 import { useError } from "@/hooks/useError";
 import http from "@/services/http";
 import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
 
 const LottieAnimation = dynamic(() => import("@/app/lib/LottieAnimation"), {
   ssr: false,
@@ -41,12 +42,10 @@ export default function AboutMe() {
       className="w-full min-h-[100vh] py-16 px-4 bg-[#f6f6f6] flex items-center justify-center"
     >
       <div className="max-w-[1280px] w-full mx-auto flex flex-col md:flex-row items-center gap-10 md:gap-16 px-2 md:px-0">
-        {/* Animasyon - Mobilde üstte, geniş ekranda solda */}
         <div className="flex-1 flex justify-center items-center order-2 md:order-1 max-w-full max-h-96 md:max-h-[400px]">
           <LottieAnimation />
         </div>
 
-        {/* İçerik */}
         <div
           className="
             flex-1
@@ -59,10 +58,7 @@ export default function AboutMe() {
             md:max-w-xl
           "
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 font-russo text-gray-800 select-none">
-            About Me
-          </h2>
-
+          <SectionTitle className="!text-left ">About Me</SectionTitle>
           {error && <p className="text-red-600 mb-4">{error}</p>}
 
           <p className="text-base md:text-lg text-gray-600 text-justify font-roboto leading-relaxed">

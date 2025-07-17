@@ -1,8 +1,9 @@
 "use client";
 
-import React from "react";
 import { IProject } from "@/interfaces/project.interface";
-import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
+import Image from "next/image";
+import React from "react";
+import { FaExternalLinkAlt, FaGithub } from "react-icons/fa";
 
 interface ProjectCardProps {
   project: IProject;
@@ -30,13 +31,16 @@ export function ProjectCard({ project }: ProjectCardProps) {
         style={{ width: 360, height: 560 }}
       >
         {project.imageUrl ? (
-          <img
-            src={project.imageUrl}
-            alt={project.title}
-            className="w-full h-[35%] object-cover select-none"
-            loading="lazy"
-            draggable={false}
-          />
+          <div className="relative w-full h-[35%]">
+            <Image
+              src={project.imageUrl}
+              alt={project.title}
+              fill
+              sizes="(max-width: 640px) 100vw, 360px"
+              className="object-cover rounded-t-3xl select-none"
+              priority={false}
+            />
+          </div>
         ) : (
           <div className="w-full h-[35%] bg-gray-200 flex items-center justify-center text-gray-400">
             No Image
@@ -51,7 +55,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
             {project.title}
           </h3>
           <p
-            className="text-sm text-gray-700 mb-4 leading-relaxed text-justify flex-grow overflow-y-auto max-h-[14rem]"
+            className="text-sm text-gray-700 mb-4 leading-relaxed text-justify flex-grow overflow-y-auto  max-h-[14rem] scrollable-text"
             style={{ lineHeight: 1.6 }}
           >
             {project.description}

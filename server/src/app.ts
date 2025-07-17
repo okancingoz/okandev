@@ -13,6 +13,7 @@ import messageRoutes from "./routes/message.routes";
 import projectRoutes from "./routes/project.routes";
 import uploadRoutes from "./routes/upload.routes";
 import AppError from "./utils/app-error.util";
+import helmet from "helmet";
 
 // Importing the configuration
 const app: Application = express();
@@ -49,7 +50,7 @@ app.use(cookieParser());
 app.use(express.json());
 
 // Security headers
-// app.use(helmet());
+app.use(helmet());
 
 // Rate limiting to prevent abuse
 const limiter = rateLimit({

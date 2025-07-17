@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { config } from "./config/config";
 import app from "./app";
-import { User } from "./models/user.model";
+
 
 // This is the entry point for the server application
 // It connects to the MongoDB database and starts the Express server

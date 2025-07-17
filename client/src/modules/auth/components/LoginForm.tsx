@@ -28,7 +28,7 @@ export default function LoginForm() {
     setError(null);
 
     try {
-      const response = await authService.loginUser(credentials);
+      await authService.loginUser(credentials);
       router.push("/dashboard");
     } catch (err: any) {
       setError(err.response?.data?.message || "Login failed!");

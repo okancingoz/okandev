@@ -30,6 +30,7 @@
     "@next/bundle-analyzer": "^15.4.1",
     "@tailwindcss/line-clamp": "^0.4.4",
     "@tailwindcss/postcss": "^4.1.11",
+    "@types/node": "^24.0.14",
     "@types/react": "^19"
   }
 }

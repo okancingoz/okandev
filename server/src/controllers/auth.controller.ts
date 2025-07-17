@@ -1,9 +1,9 @@
-import { Request, Response, NextFunction } from "express";
-import * as userService from "../services/user.service";
+import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
-import catchAsync from "../utils/catch-async.util";
-import AppError from "../utils/app-error.util";
 import { config } from "../config/config";
+import * as userService from "../services/user.service";
+import AppError from "../utils/app-error.util";
+import catchAsync from "../utils/catch-async.util";
 
 const generateToken = (id: string) => {
   return jwt.sign({ id }, config.jwt.secret, {
@@ -36,7 +36,7 @@ export const loginUser = catchAsync(
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure: false,
+      secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
       maxAge: 90 * 24 * 60 * 60 * 1000,
     });

@@ -1,12 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
+import { Button } from "@/components/Button";
+import { Input } from "@/components/Input";
+import { authService } from "@/services/auth.service";
 import { ICredentials } from "@/types/auth.types";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { authService } from "@/services/auth.service";
-import { tokenUtils } from "@/utils/token.util";
-import { Input } from "@/components/Input";
-import { Button } from "@/components/Button";
 
 const initialState: ICredentials = {
   email: "",
@@ -30,7 +29,6 @@ export default function LoginForm() {
 
     try {
       const response = await authService.loginUser(credentials);
-      tokenUtils.saveToken(response.token);
       router.push("/dashboard");
     } catch (err: any) {
       setError(err.response?.data?.message || "Login failed!");

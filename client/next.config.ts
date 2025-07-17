@@ -16,13 +16,22 @@ const nextConfig: NextConfig = withBundleAnalyzer({
   images: {
     remotePatterns: [
       {
+        protocol: "http",
+        hostname: "localhost",
+        port: "5000",
+        pathname: "/uploads/**",
+      },
+      {
         protocol: "https",
         hostname: "okandev.onrender.com",
         pathname: "/uploads/**",
       },
+      {
+        protocol: "http",
+        hostname: "okandev.onrender.com",
+        pathname: "/uploads/**",
+      },
     ],
-    formats: ["image/avif", "image/webp"],
-    minimumCacheTTL: 60 * 60 * 24 * 30,
   },
 
   reactStrictMode: true,

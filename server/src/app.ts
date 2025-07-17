@@ -29,7 +29,14 @@ app.use(
 app.use(
   "/uploads",
   (req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "https://okandev.vercel.app");
+    const allowedOrigins = [
+      "http://localhost:3000",
+      "https://okandev.vercel.app",
+    ];
+    const origin = req.headers.origin;
+    if (allowedOrigins.includes(origin || "")) {
+      res.setHeader("Access-Control-Allow-Origin", origin as string);
+    }
     res.setHeader("Cross-Origin-Resource-Policy", "cross-origin");
     next();
   },
@@ -61,6 +68,13 @@ app.use(compression());
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
+
+app.get("/api/v1", (req, res) => {
+  res.status(200).json({
+    status: "success",
+    message: "API v1 root",
+  });
+});
 
 // Routes
 app.use("/api/v1/auth", authRoutes);

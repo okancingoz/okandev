@@ -36,8 +36,8 @@ export const loginUser = catchAsync(
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
+      secure: true,
+      sameSite: "none",
       maxAge: 90 * 24 * 60 * 60 * 1000,
     });
 
@@ -45,7 +45,6 @@ export const loginUser = catchAsync(
       status: "success",
       data: {
         _id: user._id,
-        token,
         name: user.name,
         email: user.email,
       },

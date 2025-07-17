@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @import "keen-slider/keen-slider.min.css";
 
+
+
 :root {
   --background: #b4b4b4;
   --foreground: #b4b4b4;

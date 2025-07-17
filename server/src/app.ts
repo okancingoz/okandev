@@ -3,7 +3,6 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import express, { Application } from "express";
 import rateLimit from "express-rate-limit";
-import helmet from "helmet";
 import morgan from "morgan";
 import path from "path";
 import globalErrorHandler from "./middlewares/global-error.middleware";
@@ -50,7 +49,7 @@ app.use(cookieParser());
 app.use(express.json());
 
 // Security headers
-app.use(helmet());
+// app.use(helmet());
 
 // Rate limiting to prevent abuse
 const limiter = rateLimit({

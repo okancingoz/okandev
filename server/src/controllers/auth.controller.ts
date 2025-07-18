@@ -45,6 +45,7 @@ export const loginUser = catchAsync(
 
     res.status(200).json({
       status: "success",
+      token,
       data: {
         _id: user._id,
         name: user.name,

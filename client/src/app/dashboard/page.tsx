@@ -1,20 +1,27 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import { useFetch } from "@/hooks/useFetch";
+import { getToken } from "@/utils/tokenUtils"; // ✅ ekle
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
+import AboutMeContent from "@/modules/admin/AboutMeContent";
 import { AdminLayout } from "@/modules/admin/AdminLayout";
 import DashboardContent from "@/modules/admin/DashboardContent";
-import ProjectsContent from "@/modules/admin/ProjectsContent";
 import MessageContent from "@/modules/admin/MessageContent";
-import AboutMeContent from "@/modules/admin/AboutMeContent";
+import ProjectsContent from "@/modules/admin/ProjectsContent";
 
 export default function DashboardPage() {
   const router = useRouter();
   const { loading, error } = useFetch<{ message: string }>("/dashboard");
-
   const [activeKey, setActiveKey] = useState("dashboard");
+
+  useEffect(() => {
+    const token = getToken();
+    if (!token) {
+      router.push("/login");
+    }
+  }, [router]);
 
   useEffect(() => {
     if (error) {
@@ -25,7 +32,6 @@ export default function DashboardPage() {
 
   if (loading) return <p>Loading...</p>;
 
-  // Hata yönetimi
   if (error)
     return (
       <p className="text-red-500">Something went wrong. Please try again.</p>

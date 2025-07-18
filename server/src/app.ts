@@ -3,6 +3,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import express, { Application } from "express";
 import rateLimit from "express-rate-limit";
+import helmet from "helmet";
 import morgan from "morgan";
 import path from "path";
 import globalErrorHandler from "./middlewares/global-error.middleware";
@@ -13,7 +14,6 @@ import messageRoutes from "./routes/message.routes";
 import projectRoutes from "./routes/project.routes";
 import uploadRoutes from "./routes/upload.routes";
 import AppError from "./utils/app-error.util";
-import helmet from "helmet";
 
 // Importing the configuration
 const app: Application = express();
@@ -21,7 +21,11 @@ const app: Application = express();
 // CORS middleware to allow cross-origin requests
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://okandev.me"],
+    origin: [
+      "http://localhost:3000",
+      "https://okandev.me",
+      "https://www.okandev.me",
+    ],
     credentials: true,
   })
 );
@@ -32,6 +36,7 @@ app.use(
     const allowedOrigins = [
       "http://localhost:3000",
       "https://okandev.me",
+      "https://www.okandev.me",
     ];
     const origin = req.headers.origin;
     if (allowedOrigins.includes(origin || "")) {

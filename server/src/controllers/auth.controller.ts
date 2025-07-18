@@ -35,9 +35,11 @@ export const loginUser = catchAsync(
     const token = generateToken(user._id.toString());
 
     res.cookie("token", token, {
+      path: "/",
       httpOnly: true,
       secure: true,
       sameSite: "none",
+      domain: ".okandev.me",
       maxAge: 90 * 24 * 60 * 60 * 1000,
     });
 

@@ -21,7 +21,7 @@ const app: Application = express();
 // CORS middleware to allow cross-origin requests
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://okandev.vercel.app"],
+    origin: ["http://localhost:3000", "https://okandev.me"],
     credentials: true,
   })
 );
@@ -31,7 +31,7 @@ app.use(
   (req, res, next) => {
     const allowedOrigins = [
       "http://localhost:3000",
-      "https://okandev.vercel.app",
+      "https://okandev.me",
     ];
     const origin = req.headers.origin;
     if (allowedOrigins.includes(origin || "")) {

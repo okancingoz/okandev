@@ -46,10 +46,10 @@ export default function LoopingTypewriter({
   }, [display, mode, index, texts, typingSpeed, pauseDuration]);
 
   return (
-    <h1 className="text-4xl md:text-6xl font-bold text-gray-900">
+    <h2 className="text-4xl md:text-6xl font-bold text-gray-900">
       <span>{texts[0]}</span>
       <span>{display.slice(texts[0].length)}</span>
       <span className="blink">|</span>
-    </h1>
+    </h2>
   );
 }

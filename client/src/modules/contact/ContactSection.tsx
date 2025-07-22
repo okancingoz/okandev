@@ -11,7 +11,7 @@ const ContactSection: React.FC = () => {
       id="contact"
       className="bg-[#f6f6f6] min-h-[40vh] flex flex-col items-center justify-center px-6 py-12 relative z-10 border-t border-gray-300"
     >
-      <SectionTitle>Contact Me</SectionTitle>
+      <SectionTitle className="text-4xl">Contact Me</SectionTitle>
 
       <ContactForm />
 

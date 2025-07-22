@@ -47,7 +47,7 @@ export function ProjectsSection() {
       id="projects"
       className="h-screen bg-[#f6f6f6] flex flex-col items-center justify-center px-4"
     >
-      <SectionTitle>Projects</SectionTitle>
+      <SectionTitle className="text-4xl">Projects</SectionTitle>
       <div className="w-full max-w-[1280px] mx-auto ">
         <Swiper
           ref={swiperRef}

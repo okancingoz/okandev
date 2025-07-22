@@ -24,7 +24,7 @@ export default function TechStack() {
       id="techstacks"
       className="bg-[#f6f6f6] py-16 flex flex-col items-center"
     >
-      <SectionTitle>Tech Stack</SectionTitle>
+      <SectionTitle className="text-4xl">Tech Stack</SectionTitle>
 
       <div
         className="max-w-[1280px] w-full px-6 rounded-3xl"

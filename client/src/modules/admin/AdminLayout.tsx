@@ -17,13 +17,13 @@ export function AdminLayout({
     { label: "Dashboard", key: "dashboard" },
     { label: "Projects", key: "projects" },
     { label: "Messages", key: "messages" },
-    { label: "About Me", key: "about" }, 
+    { label: "About Me", key: "about" },
   ];
 
   return (
     <div className="flex h-screen bg-gray-900 text-white">
       <nav className="w-60 bg-gray-800 p-4 flex flex-col">
-        <h1 className="text-2xl font-bold mb-8">Admin Panel</h1>
+        <h2 className="text-2xl font-bold mb-8">Admin Panel</h2>
 
         {navItems.map((item) => (
           <button

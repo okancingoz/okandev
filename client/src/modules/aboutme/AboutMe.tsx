@@ -53,7 +53,7 @@ export default function AboutMe() {
             md:max-w-xl
           "
         >
-          <SectionTitle className="!text-left ">About Me</SectionTitle>
+          <SectionTitle className="text-4xl !text-left ">About Me</SectionTitle>
           {error && <p className="text-red-600 mb-4">{error}</p>}
 
           <p className="text-base md:text-lg text-gray-600 text-justify font-roboto leading-relaxed">

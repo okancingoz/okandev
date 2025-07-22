@@ -69,7 +69,12 @@ app.use(cookieParser());
 app.use(express.json());
 
 // Security headers
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: false, // Disable CSP for simplicity, configure as needed
+    crossOriginResourcePolicy: false, // Disable CORS for simplicity, configure as needed
+  })
+);
 
 // Rate limiting to prevent abuse
 const limiter = rateLimit({

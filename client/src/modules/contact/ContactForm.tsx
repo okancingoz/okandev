@@ -1,8 +1,8 @@
 "use client";
 
-import { FaUser, FaEnvelope, FaComment } from "react-icons/fa";
 import { sendMessage } from "@/services/contact.service";
-import { useState, useEffect } from "react";
+import { MessageSquare, User } from "lucide-react";
+import { useEffect, useState } from "react";
 
 interface FormData {
   name: string;
@@ -84,7 +84,7 @@ const ContactForm: React.FC = () => {
     >
       {/* Name input with icon */}
       <div className="relative">
-        <FaUser className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+        <User className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
         <input
           type="text"
           name="name"
@@ -98,7 +98,7 @@ const ContactForm: React.FC = () => {
 
       {/* Email input with icon */}
       <div className="relative">
-        <FaEnvelope className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+        <MessageSquare className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
         <input
           type="email"
           name="email"
@@ -112,7 +112,7 @@ const ContactForm: React.FC = () => {
 
       {/* Message textarea with icon */}
       <div className="relative">
-        <FaComment className="absolute left-3 top-4 text-gray-400 pointer-events-none" />
+        <MessageSquare className="absolute left-3 top-4 text-gray-400 pointer-events-none" />
         <textarea
           name="message"
           placeholder="Your message"

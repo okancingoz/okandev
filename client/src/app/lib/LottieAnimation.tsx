@@ -1,20 +1,56 @@
 "use client";
 
-import dynamic from "next/dynamic";
+import type { LottiePlayer } from "lottie-web";
+import React, { useEffect, useRef } from "react";
 
-const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
+type LottieAnimationProps = {
+  animPath: string;
+  loop?: boolean;
+  autoplay?: boolean;
+  className?: string;
+};
 
-import robotAnim from "@/assets/lottie/robot3d.json";
+const LottieAnimationComponent = ({
+  animPath,
+  loop = true,
+  autoplay = true,
+  className = "w-full h-full",
+}: LottieAnimationProps) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const lottieInstance = useRef<LottiePlayer | null>(null);
+  const animRef = useRef<any>(null); 
 
-export default function LottieAnimation() {
-  return (
-    <div className="w-full h-full flex justify-center items-center">
-      <Lottie
-        animationData={robotAnim}
-        loop
-        autoplay
-        style={{ width: "100%", maxWidth: "640px", height: "auto" }}
-      />
-    </div>
-  );
-}
+  useEffect(() => {
+    let isMounted = true;
+
+    const load = async () => {
+      if (!lottieInstance.current) {
+        const mod = await import("lottie-web");
+        lottieInstance.current = mod.default;
+      }
+
+      if (isMounted && ref.current && lottieInstance.current) {
+        animRef.current = lottieInstance.current.loadAnimation({
+          container: ref.current,
+          renderer: "svg",
+          loop,
+          autoplay,
+          path: animPath,
+        });
+      }
+    };
+
+    load();
+
+    return () => {
+      isMounted = false;
+      if (animRef.current) {
+        animRef.current.destroy();
+      }
+    };
+  }, [animPath, loop, autoplay]);
+
+  return <div ref={ref} className={className} />;
+};
+
+export const LottieAnimation = React.memo(LottieAnimationComponent);

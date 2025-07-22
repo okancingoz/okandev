@@ -1,9 +1,9 @@
 "use client";
 
 import { IProject } from "@/interfaces/project.interface";
+import { Icon } from "@iconify/react";
 import Image from "next/image";
 import React from "react";
-import { FaExternalLinkAlt, FaGithub } from "react-icons/fa";
 
 interface ProjectCardProps {
   project: IProject;
@@ -70,7 +70,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
               className="flex items-center gap-2 hover:text-gray-900 transition-colors"
               aria-label="GitHub link"
             >
-              <FaGithub size={20} />
+              <Icon icon="akar-icons:github-fill" width={24} />
               GitHub
             </a>
 
@@ -82,7 +82,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
               className="flex items-center gap-2 hover:text-gray-900 transition-colors"
               aria-label="Live site link"
             >
-              <FaExternalLinkAlt size={18} />
+              <Icon icon="akar-icons:link" width={24} />
               Live
             </a>
           </div>

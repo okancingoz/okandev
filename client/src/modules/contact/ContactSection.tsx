@@ -1,7 +1,8 @@
 "use client";
 
 import SectionTitle from "@/components/SectionTitle";
-import { FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
+import { Icon } from "@iconify/react";
+
 import ContactForm from "./ContactForm";
 
 const ContactSection: React.FC = () => {
@@ -23,7 +24,7 @@ const ContactSection: React.FC = () => {
           className="text-gray-600 hover:text-gray-900 transition-colors text-3xl flex items-center"
           title="GitHub"
         >
-          <FaGithub />
+          <Icon icon="mdi:github" width={24} />
         </a>
         <a
           href="https://linkedin.com/in/okancingoz"
@@ -33,7 +34,7 @@ const ContactSection: React.FC = () => {
           className="text-gray-600 hover:text-gray-900 transition-colors text-3xl flex items-center"
           title="LinkedIn"
         >
-          <FaLinkedin />
+          <Icon icon="mdi:linkedin" width={24} />
         </a>
         <a
           href="mailto:okanc.ngoz@gmail.com"
@@ -41,7 +42,7 @@ const ContactSection: React.FC = () => {
           className="text-gray-600 hover:text-gray-900 transition-colors text-3xl flex items-center"
           title="Email"
         >
-          <FaEnvelope />
+          <Icon icon="mdi:email" width={24} />
         </a>
       </div>
 

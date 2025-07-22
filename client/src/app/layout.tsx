@@ -2,23 +2,16 @@
 import { ErrorProvider } from "@/context/error.context";
 import "@/styles/base/globals.css";
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { Lato } from "next/font/google";
 
-const roboto = localFont({
-  src: [
-    {
-      path: "../fonts/roboto/static/Roboto-Bold.ttf",
-      weight: "500",
-      style: "normal",
-    },
-    {
-      path: "../fonts/roboto/static/Roboto-Light.ttf",
-      weight: "400",
-      style: "normal",
-    },
-  ],
-  variable: "--font-roboto",
+const lato = Lato({
+  subsets: ["latin"],
+  weight: ["100", "300", "400", "700", "900"],
+  variable: "--font-lato",
   display: "swap",
+  preload: true,
+  fallback: ["Helvetica", "Arial", "sans-serif"],
+  style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {
@@ -32,24 +25,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={roboto.variable}>
-      <head>
-        <link
-          rel="preload"
-          href="/_next/static/media/Roboto_Bold-s.p.21db0d56.ttf"
-          as="font"
-          type="font/ttf"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="/_next/static/media/Roboto_Light-s.p.5f11f909.ttf"
-          as="font"
-          type="font/ttf"
-          crossOrigin="anonymous"
-        />
-      </head>
-      <body className="font-sans antialiased">
+    <html lang="en" className={lato.className}>
+      <body>
         <ErrorProvider>{children}</ErrorProvider>
       </body>
     </html>

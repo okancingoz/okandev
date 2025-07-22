@@ -1,12 +1,8 @@
 @import "tailwindcss";
 @import "keen-slider/keen-slider.min.css";
 
-
-
 :root {
-  --background: #b4b4b4;
-  --foreground: #b4b4b4;
-  --font-sans: "Roboto", sans-serif;
+  --font-sans: "Lato", sans-serif;
   --font-mono: "Courier New", monospace;
 }
 
@@ -19,6 +15,7 @@
 
 * {
   box-sizing: border-box;
+  font-family: var(--font-sans);
 }
 
 html {
@@ -26,7 +23,6 @@ html {
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans);
+  background-color: #ffffff;
 }
+

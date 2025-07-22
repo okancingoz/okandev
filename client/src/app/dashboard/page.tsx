@@ -1,7 +1,7 @@
 "use client";
 
 import { useFetch } from "@/hooks/useFetch";
-import { getToken } from "@/utils/tokenUtils"; // ✅ ekle
+import { getToken } from "@/utils/tokenUtils"; 
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 

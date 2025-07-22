@@ -1,15 +1,10 @@
 "use client";
 
+import { LottieAnimation } from "@/app/lib/LottieAnimation";
 import SectionTitle from "@/components/SectionTitle";
 import { useError } from "@/hooks/useError";
 import http from "@/services/http";
-import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
-
-const LottieAnimation = dynamic(() => import("@/app/lib/LottieAnimation"), {
-  ssr: false,
-  loading: () => <p>Loading animation...</p>,
-});
 
 export default function AboutMe() {
   const [content, setContent] = useState<string>("");
@@ -43,7 +38,7 @@ export default function AboutMe() {
     >
       <div className="max-w-[1280px] w-full mx-auto flex flex-col md:flex-row items-center gap-10 md:gap-16 px-2 md:px-0">
         <div className="flex-1 flex justify-center items-center order-2 md:order-1 max-w-full max-h-96 md:max-h-[400px]">
-          <LottieAnimation />
+          <LottieAnimation animPath="/assets/lottie/robot3d.json" />
         </div>
 
         <div

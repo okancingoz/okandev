@@ -5,26 +5,17 @@ import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import SectionTitle from "@/components/SectionTitle";
-import {
-  SiCss3,
-  SiExpress,
-  SiHtml5,
-  SiJavascript,
-  SiMongodb,
-  SiNodedotjs,
-  SiReact,
-  SiReactos,
-} from "react-icons/si";
+import { Icon } from "@iconify/react";
 
 const techs = [
-  { name: "React", icon: <SiReact size={96} /> },
-  { name: "React Native", icon: <SiReactos size={96} /> },
-  { name: "JavaScript", icon: <SiJavascript size={96} /> },
-  { name: "MongoDB", icon: <SiMongodb size={96} /> },
-  { name: "Express", icon: <SiExpress size={96} /> },
-  { name: "Node.js", icon: <SiNodedotjs size={96} /> },
-  { name: "HTML5", icon: <SiHtml5 size={96} /> },
-  { name: "CSS3", icon: <SiCss3 size={96} /> },
+  { name: "React", icon: <Icon icon="logos:react" width={96} /> },
+  { name: "Next.js", icon: <Icon icon="logos:nextjs" width={96} /> },
+  { name: "JavaScript", icon: <Icon icon="logos:javascript" width={96} /> },
+  { name: "MongoDB", icon: <Icon icon="logos:mongodb" width={96} /> },
+  { name: "Express", icon: <Icon icon="logos:express" width={96} /> },
+  { name: "Node.js", icon: <Icon icon="logos:nodejs" width={96} /> },
+  { name: "HTML5", icon: <Icon icon="logos:html-5" width={96} /> },
+  { name: "CSS3", icon: <Icon icon="logos:css-3" width={96} /> },
 ];
 
 export default function TechStack() {
@@ -63,7 +54,7 @@ export default function TechStack() {
             <SwiperSlide key={name}>
               <div
                 title={name}
-                className="flex items-center justify-center cursor-default select-none rounded-2xl"
+                className="flex items-center p-8 justify-center cursor-default select-none rounded-2xl"
                 style={{
                   width: "128px",
                   height: "128px",

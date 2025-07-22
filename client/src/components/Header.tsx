@@ -29,11 +29,9 @@ export default function Header() {
             "inset 20px 20px 60px #c5c5c5, inset -20px -20px 60px #ffffff",
         }}
       >
-        <div>
-          <h1 className="text-xl md:text-2xl font-semibold text-gray-900">
-            okandev
-          </h1>
-        </div>
+        <h2 className="text-xl md:text-2xl font-semibold text-cyan-950">
+          okandev
+        </h2>
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-4 lg:gap-8">

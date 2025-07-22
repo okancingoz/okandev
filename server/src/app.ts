@@ -39,10 +39,23 @@ app.use(
       "https://www.okandev.me",
     ];
     const origin = req.headers.origin;
-    if (allowedOrigins.includes(origin || "")) {
-      res.setHeader("Access-Control-Allow-Origin", origin as string);
+    if (origin && allowedOrigins.includes(origin)) {
+      res.setHeader("Access-Control-Allow-Origin", origin);
+      res.setHeader("Access-Control-Allow-Credentials", "true");
+      res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS");
+      res.setHeader(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+      );
     }
     res.setHeader("Cross-Origin-Resource-Policy", "cross-origin");
+
+    // OPTIONS preflight request için hızlı cevap
+    if (req.method === "OPTIONS") {
+      res.sendStatus(204);
+      return;
+    }
+
     next();
   },
   express.static(path.join(__dirname, "../uploads"))
@@ -88,10 +101,6 @@ app.use("/api/v1/projects", projectRoutes);
 app.use("/api/v1/messages", messageRoutes);
 app.use("/api/v1/about", aboutRoutes);
 app.use("/api/v1/upload", uploadRoutes);
-
-// Serve static files from the uploads directory
-// This allows the application to serve files uploaded by users
-app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 
 // Test route
 app.get("/", (req, res) => {

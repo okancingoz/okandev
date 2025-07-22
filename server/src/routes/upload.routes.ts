@@ -1,8 +1,8 @@
-import express, { Request, Response, NextFunction } from "express";
-import { protect } from "../middlewares/auth.middleware"; 
-import upload from "../middlewares/upload.middleware"; 
-import { optimizeImageFromBuffer } from "../utils/optimize-image";
+import express from "express";
 import path from "path";
+import { protect } from "../middlewares/auth.middleware";
+import upload from "../middlewares/upload.middleware";
+import { optimizeImageFromBuffer } from "../utils/optimize-image";
 
 const router = express.Router();
 
@@ -22,9 +22,11 @@ router.post(
 
       await optimizeImageFromBuffer(req.file.buffer, outputPath);
 
-      const imageUrl = `${req.protocol}://${req.get(
-        "host"
-      )}/uploads/${fileName}`;
+      const backendHost =
+        process.env.BACKEND_HOST || `${req.protocol}://${req.get("host")}`;
+
+      const imageUrl = `${backendHost}/uploads/${fileName}`;
+
       res.status(201).json({ status: "success", data: { imageUrl } });
     } catch (error) {
       next(error);

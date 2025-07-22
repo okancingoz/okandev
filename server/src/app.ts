@@ -37,6 +37,7 @@ app.use(
       "http://localhost:3000",
       "https://okandev.me",
       "https://www.okandev.me",
+      "https://api.okandev.me",
     ];
     const origin = req.headers.origin;
     if (origin && allowedOrigins.includes(origin)) {
